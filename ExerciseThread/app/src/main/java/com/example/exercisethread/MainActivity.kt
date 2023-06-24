@@ -14,13 +14,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var number: Int = 0
     private val handler = Handler(Looper.getMainLooper())
+    private val swipeThreshold = 100f
 
     private val increaseRunnable = object : Runnable {
         override fun run() {
             number++
             binding.number.text = number.toString()
             updateNumberColor()
-            handler.postDelayed(this, 50) // speed of increasing
+            handler.postDelayed(this, 50)
         }
     }
 
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity() {
             number--
             binding.number.text = number.toString()
             updateNumberColor()
-            handler.postDelayed(this, 50) // speed of decreasing
+            handler.postDelayed(this, 50)
         }
     }
 
@@ -43,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             binding.number.text = number.toString()
             updateNumberColor()
             if (number != 0) {
-                handler.postDelayed(this, 50) // start resetting
+                handler.postDelayed(this, 50)
             }
         }
     }
@@ -53,35 +54,49 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var lastY = 0f
+        var startY = 0f
+        var lastUpdateY = 0f
 
         binding.root.setOnTouchListener { _, motionEvent ->
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    lastY = motionEvent.y
+                    startY = motionEvent.y
+                    lastUpdateY = startY
                 }
 
                 MotionEvent.ACTION_MOVE -> {
-                    handler.removeCallbacks(resetRunnable)
-                    val deltaY = lastY - motionEvent.y
-                    if (deltaY > 0) {
-                        handler.removeCallbacks(decreaseRunnable)
-                        handler.post(increaseRunnable)
-                    } else {
+                    val deltaY = startY - motionEvent.y
+                    val deltaLastUpdateY = lastUpdateY - motionEvent.y
+
+                    if (Math.abs(deltaLastUpdateY) < swipeThreshold) {
                         handler.removeCallbacks(increaseRunnable)
-                        handler.post(decreaseRunnable)
+                        handler.removeCallbacks(decreaseRunnable)
+                    } else {
+                        handler.removeCallbacks(resetRunnable)
+                        if (deltaY > 0f) {
+                            handler.removeCallbacks(decreaseRunnable)
+                            handler.post(increaseRunnable)
+                        } else if (deltaY < 0f) {
+                            handler.removeCallbacks(increaseRunnable)
+                            handler.post(decreaseRunnable)
+                        }
+                        lastUpdateY = motionEvent.y
                     }
-                    lastY = motionEvent.y
                 }
 
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     handler.removeCallbacks(increaseRunnable)
                     handler.removeCallbacks(decreaseRunnable)
-                    handler.postDelayed(resetRunnable, 5000) // Start resetting after 5 seconds
+                    handler.postDelayed(resetRunnable, 5000)
                 }
             }
             true
         }
+
+
+
+
+
 
         binding.button1.setOnClickListener {
             handler.removeCallbacks(decreaseRunnable)
