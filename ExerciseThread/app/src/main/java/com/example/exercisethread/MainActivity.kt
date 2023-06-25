@@ -1,5 +1,6 @@
 package com.example.exercisethread
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.MotionEvent
 import com.example.exercisethread.databinding.ActivityMainBinding
+import kotlin.math.abs
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
@@ -49,26 +51,24 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         var startY = 0f
-        var lastUpdateY = 0f
 
-        binding.root.setOnTouchListener { _, motionEvent ->
+        binding.root.setOnTouchListener {view, motionEvent ->
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
                     startY = motionEvent.y
-                    lastUpdateY = startY
-                }
 
+                }
                 MotionEvent.ACTION_MOVE -> {
                     val deltaY = startY - motionEvent.y
-                    val deltaLastUpdateY = lastUpdateY - motionEvent.y
 
-                    if (Math.abs(deltaLastUpdateY) < swipeThreshold) {
+                    if (abs(deltaY) < swipeThreshold) {
                         handler.removeCallbacks(increaseRunnable)
                         handler.removeCallbacks(decreaseRunnable)
                     } else {
@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
                             handler.removeCallbacks(increaseRunnable)
                             handler.post(decreaseRunnable)
                         }
-                        lastUpdateY = motionEvent.y
+                        startY = motionEvent.y
                     }
                 }
 
@@ -92,11 +92,6 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-
-
-
-
-
 
         binding.button1.setOnClickListener {
             handler.removeCallbacks(decreaseRunnable)
