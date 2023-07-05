@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">FragmentExercise</string>
-    <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -9,7 +8,6 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="payment"><![CDATA[Quick & Easy Payment]]></string>
     <string name="ob_des_1">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s</string>
@@ -20,5 +18,17 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="login">LogIn</string>
-    <string name="forget_password">Forget Password?</string>
+    <string name="forget_password">Forgot Password?</string>
+    <string name="next">Next</string>
+    <string name="finish">Finish</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="change_password">We have sent you an\nemail to change your</string>
+    <string name="create">Create a free account!</string>
+    <string name="signup_login">Login</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="sign_up_bt">SIGN UP</string>
+    <string name="change_pass">Yay! Your password has been</string>
+    <string name="log_in">You can now log into your account</string>
+    <string name="log_in2">with the new password</string>
+    <string name="neo">NEO chart</string>
 </resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/increase"
+        android:title=""
+        android:icon="@drawable/icons_8_increase"
+        />
+
+    <item
+        android:id="@+id/pie"
+        android:title=""
+        android:icon="@drawable/icons_8_chart_2"
+        />
+
+    <item
+        android:id="@+id/calendar"
+        android:title=""
+        android:icon="@drawable/icons_8_news"
+        />
+
+    <item
+        android:id="@+id/profile"
+        android:title=""
+        android:icon="@drawable/icons_8_customer"
+        />
+
+</menu>

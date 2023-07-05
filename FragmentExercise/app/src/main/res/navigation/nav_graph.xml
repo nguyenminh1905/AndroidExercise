@@ -9,10 +9,61 @@
         android:id="@+id/logInFragment"
         android:name="com.example.fragmentexercise.LogInFragment"
         android:label="fragment_log_in"
-        tools:layout="@layout/fragment_log_in" />
+        tools:layout="@layout/fragment_log_in" >
+        <action
+            android:id="@+id/action_logInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_logInFragment_to_forgetPassFragment"
+            app:destination="@id/forgetPassFragment" />
+        <action
+            android:id="@+id/action_logInFragment_to_appFragment"
+            app:popUpTo="@id/logInFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/appFragment" />
+    </fragment>
     <fragment
         android:id="@+id/onBoardingFragment"
         android:name="com.example.fragmentexercise.OnBoardingFragment"
         android:label="fragment_on_boarding"
-        tools:layout="@layout/fragment_on_boarding" />
+        tools:layout="@layout/fragment_on_boarding" >
+        <action
+            android:id="@+id/action_onBoardingFragment_to_logInFragment"
+            app:destination="@id/logInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.fragmentexercise.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_forgetPassFragment"
+            app:destination="@id/forgetPassFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_logInFragment"
+            app:destination="@id/logInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/forgetPassFragment"
+        android:name="com.example.fragmentexercise.ForgetPassFragment"
+        android:label="fragment_forget_pass"
+        tools:layout="@layout/fragment_forget_pass" >
+        <action
+            android:id="@+id/action_forgetPassFragment_to_forgetPopUpFragment"
+            app:destination="@id/forgetPopUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/appFragment"
+        android:name="com.example.fragmentexercise.AppFragment"
+        android:label="fragment_app"
+        tools:layout="@layout/fragment_app" />
+    <fragment
+        android:id="@+id/forgetPopUpFragment"
+        android:name="com.example.fragmentexercise.ForgetPopUpFragment"
+        android:label="fragment_forget_pop_up"
+        tools:layout="@layout/fragment_forget_pop_up" >
+        <action
+            android:id="@+id/action_forgetPopUpFragment_to_logInFragment"
+            app:destination="@id/logInFragment" />
+    </fragment>
 </navigation>

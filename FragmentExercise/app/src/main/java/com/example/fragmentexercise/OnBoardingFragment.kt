@@ -20,7 +20,7 @@ class OnBoardingFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_on_boarding, container, false)
 
-        val fragmentList = arrayListOf<Fragment>(
+        val fragmentList = listOf<Fragment>(
             ObFirstScreen(),
             ObSecondScreen(),
             ObThirdScreen()
