@@ -1,14 +1,260 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frame_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="100dp"
     tools:context=".appscreens.AppThirdScreen">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+        <!-- TODO: Update blank fragment layout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/ic_componente_6_2"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="32dp"
+                    android:src="@drawable/icons_8_expand_arrow" />
+
+                <TextView
+                    style="@style/Header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:text="NEWS" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:src="@drawable/main" />
+
+            <RelativeLayout
+                android:id="@+id/atlantia"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp">
+
+                <ImageView
+                    android:id="@+id/image1"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/atlantia" />
+
+                <TextView
+                    android:id="@+id/alt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_toRightOf="@id/image1"
+                    android:text="ALT -3,87%"
+                    android:textColor="@color/red" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/alt"
+                    android:layout_marginLeft="32dp"
+                    android:layout_toRightOf="@+id/alt"
+                    android:text="3 Sept 2020"
+                    android:textColor="@color/gray" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/alert" />
+
+                <TextView
+                    android:id="@+id/header"
+                    style="@style/Header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/alt"
+                    android:layout_marginLeft="24dp"
+                    android:layout_toRightOf="@+id/image1"
+                    android:text="ATLANTIA"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/header"
+                    android:layout_marginLeft="24dp"
+                    android:layout_toRightOf="@+id/image1"
+                    android:text="Illum velit nam voluptnium enim au\nratione ratione officil totam. Molitia\nelum sint tempora ducimus"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:src="@drawable/image2" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/xiaomi"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp">
+
+                <ImageView
+                    android:id="@+id/image2"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/atlantia" />
+
+                <TextView
+                    android:id="@+id/alt2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_toRightOf="@id/image2"
+                    android:text="ALT -3,87%"
+                    android:textColor="@color/red" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/alt2"
+                    android:layout_marginLeft="32dp"
+                    android:layout_toRightOf="@+id/alt2"
+                    android:text="3 Sept 2020"
+                    android:textColor="@color/gray" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/alert" />
+
+                <TextView
+                    android:id="@+id/header2"
+                    style="@style/Header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/alt2"
+                    android:layout_marginLeft="24dp"
+                    android:layout_toRightOf="@+id/image2"
+                    android:text="XIAOMI"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/header2"
+                    android:layout_marginLeft="24dp"
+                    android:layout_toRightOf="@+id/image2"
+                    android:text="Illum velit nam voluptnium enim au\nratione ratione officil totam. Molitia\nelum sint tempora ducimus"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:src="@drawable/image2" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/apple"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp">
+
+                <ImageView
+                    android:id="@+id/image3"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/atlantia" />
+
+                <TextView
+                    android:id="@+id/alt3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_toRightOf="@id/image3"
+                    android:text="ALT -3,87%"
+                    android:textColor="@color/red" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/alt3"
+                    android:layout_marginLeft="32dp"
+                    android:layout_toRightOf="@+id/alt3"
+                    android:text="3 Sept 2020"
+                    android:textColor="@color/gray" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/alert" />
+
+                <TextView
+                    android:id="@+id/header3"
+                    style="@style/Header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/alt3"
+                    android:layout_marginLeft="24dp"
+                    android:layout_toRightOf="@+id/image3"
+                    android:text="APPLE"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/header3"
+                    android:layout_marginLeft="24dp"
+                    android:layout_toRightOf="@+id/image3"
+                    android:text="Illum velit nam voluptnium enim au\nratione ratione officil totam. Molitia\nelum sint tempora ducimus"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:src="@drawable/image2" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
 </FrameLayout>

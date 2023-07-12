@@ -18,6 +18,8 @@
             app:destination="@id/forgetPassFragment" />
         <action
             android:id="@+id/action_logInFragment_to_appFragment"
+            app:popUpTo="@id/logInFragment"
+            app:popUpToInclusive="true"
             app:destination="@id/appFragment" />
     </fragment>
     <fragment
@@ -54,7 +56,17 @@
         android:id="@+id/appFragment"
         android:name="com.example.fragmentexercise.AppFragment"
         android:label="fragment_app"
-        tools:layout="@layout/fragment_app" />
+        tools:layout="@layout/fragment_app" >
+        <action
+            android:id="@+id/action_appFragment_to_atlantaScreen"
+            app:destination="@id/atlantaScreen" />
+        <action
+            android:id="@+id/action_appFragment_to_xiaomiScreen"
+            app:destination="@id/xiaomiScreen" />
+        <action
+            android:id="@+id/action_appFragment_to_appleScreen"
+            app:destination="@id/appleScreen" />
+    </fragment>
     <fragment
         android:id="@+id/forgetPopUpFragment"
         android:name="com.example.fragmentexercise.ForgetPopUpFragment"
@@ -64,4 +76,19 @@
             android:id="@+id/action_forgetPopUpFragment_to_logInFragment"
             app:destination="@id/logInFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/atlantaScreen"
+        android:name="com.example.fragmentexercise.appscreens.AtlantaScreen"
+        android:label="fragment_atlanta_screen"
+        tools:layout="@layout/fragment_atlanta_screen" />
+    <fragment
+        android:id="@+id/xiaomiScreen"
+        android:name="com.example.fragmentexercise.appscreens.XiaomiScreen"
+        android:label="fragment_xiaomi_screen"
+        tools:layout="@layout/fragment_xiaomi_screen" />
+    <fragment
+        android:id="@+id/appleScreen"
+        android:name="com.example.fragmentexercise.appscreens.AppleScreen"
+        android:label="fragment_apple_screen"
+        tools:layout="@layout/fragment_apple_screen" />
 </navigation>

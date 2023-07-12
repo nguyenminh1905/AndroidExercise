@@ -15,5 +15,4 @@ class AppFourthScreen : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_app_fourth_screen, container, false)
     }
-
 }

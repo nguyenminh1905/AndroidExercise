@@ -8,22 +8,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fragmentexercise.R
 import com.example.fragmentexercise.TabRecycleViewAdapter
-import com.google.android.material.tabs.TabLayout
 
 
-class AppSecondScreen : Fragment() {
+class AppleScreen : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_app_second_screen, container, false)
+        return inflater.inflate(R.layout.fragment_apple_screen, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val items = listOf("General", "Technical Section", "Markets", "Charts")
+        val items = listOf("EDITORIAL", "CRYPTO NEWS", "RAW MATERIAL", "ECONOMICS")
         val adapter = TabRecycleViewAdapter(items)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)

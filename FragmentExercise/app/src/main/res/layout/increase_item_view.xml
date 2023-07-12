@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp">
+
+    <TextView
+        android:id="@+id/day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="DAY 0"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/day"
+        android:text="LONDON 0" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/day"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@+id/place"
+        android:text="10:44:0" />
+
+    <TextView
+        android:id="@+id/money"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+
+        android:background="@drawable/round_coner"
+        android:gravity="center"
+        android:text="20.047,0"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/money"
+        android:layout_alignParentEnd="true"
+        android:text="+203(+1,0%)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/percent"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/darker_gray" />
+</RelativeLayout>
