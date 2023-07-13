@@ -7,9 +7,17 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 
 interface ZingApiService {
+
+    /**
+     * getting data from api
+     */
     @GET("xhr/chart-realtime?songId=0&videoId=0&albumId=0&chart=song&time=-1")
     suspend fun getZingChart(): ZingResponse
 
+
+    /**
+     * creating instance of zingapiservice with moshi to parse json data
+     */
     companion object {
         fun create(): ZingApiService {
             val moshi = Moshi.Builder()

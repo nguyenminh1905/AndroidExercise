@@ -10,13 +10,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dataapiexercise.databinding.ListSongItemBinding
 import com.example.dataapiexercise.network.Song
 
-class ZingMusicAdapter(private val songList: List<Song>, private val navController: NavController) :
+class ZingMusicAdapter(private val songList: List<Song>,
+                       private val navController: NavController,
+                       private val onDetailClick: (Song) -> Unit) :
     RecyclerView.Adapter<ZingMusicAdapter.ZingMusicHolder>() {
 
     inner class ZingMusicHolder(val binding: ListSongItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        var currentSong: Song? = null
+
         init {
-            //v is view being clicked
             binding.overflowMenu.setOnClickListener { v ->
                 val popup = PopupMenu(v.context, v)
                 val inflater: MenuInflater = popup.menuInflater
@@ -29,22 +32,36 @@ class ZingMusicAdapter(private val songList: List<Song>, private val navControll
                                 .show()
                             true
                         }
-
                         R.id.detail -> {
+                            currentSong?.let {
+                                onDetailClick(it)
+                            }
                             navController.navigate(R.id.action_zingMusicFragment_to_detailsFragment)
                             true
                         }
-
                         else -> false
                     }
                 }
                 popup.show()
             }
 
-            // Set click listener for card view
+            /**
+             *  Passing the data with onDetailClick
+             *  Sets the selectedSong value in the ViewModel to the song that was clicked on.
+             */
+
             binding.card.setOnClickListener {
+                currentSong?.let {
+                    onDetailClick(it)
+                }
                 navController.navigate(R.id.action_zingMusicFragment_to_detailsFragment)
             }
+        }
+
+        fun bind(song: Song, position: Int) {
+            currentSong = song
+            binding.id.text = (position + 1).toString()
+            binding.songName.text = song.name
         }
     }
 
@@ -55,9 +72,7 @@ class ZingMusicAdapter(private val songList: List<Song>, private val navControll
     }
 
     override fun onBindViewHolder(holder: ZingMusicHolder, position: Int) {
-        val song = songList[position]
-        holder.binding.id.text = (position + 1).toString()
-        holder.binding.songName.text = song.name
+        holder.bind(songList[position], position)
     }
 
     override fun getItemCount(): Int {
