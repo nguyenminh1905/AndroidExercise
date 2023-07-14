@@ -8,12 +8,16 @@ import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dataapiexercise.R
+import com.example.dataapiexercise.database.FavouriteSong
 import com.example.dataapiexercise.databinding.ListSongItemBinding
 import com.example.dataapiexercise.network.Song
+import com.example.dataapiexercise.viewmodel.FavouriteSongViewModel
 
 class ZingMusicAdapter(private val songList: List<Song>,
                        private val navController: NavController,
-                       private val onDetailClick: (Song) -> Unit) :
+                       private val onDetailClick: (Song) -> Unit,
+                       private val viewModel: FavouriteSongViewModel
+) :
     RecyclerView.Adapter<ZingMusicAdapter.ZingMusicHolder>() {
 
     inner class ZingMusicHolder(private val binding: ListSongItemBinding) :
@@ -31,6 +35,10 @@ class ZingMusicAdapter(private val songList: List<Song>,
                         R.id.favourite -> {
                             Toast.makeText(v.context, "Add to favourite!", Toast.LENGTH_SHORT)
                                 .show()
+                            currentSong?.let {
+                                // Insert into database
+                                viewModel.addFavourite(it.name)
+                            }
                             true
                         }
                         R.id.detail -> {

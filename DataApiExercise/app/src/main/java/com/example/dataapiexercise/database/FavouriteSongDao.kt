@@ -4,7 +4,8 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
-import com.example.dataapiexercise.network.Song
+import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FavouriteSongDao {
@@ -13,4 +14,8 @@ interface FavouriteSongDao {
 
     @Delete
     suspend fun delete(song: FavouriteSong)
+
+    @Query("SELECT * FROM favourite_songs")
+    fun getAll(): Flow<List<FavouriteSong>>
+
 }

@@ -28,7 +28,11 @@
         android:id="@+id/favouriteFragment"
         android:name="com.example.dataapiexercise.screens.FavouriteFragment"
         android:label="Favourites"
-        tools:layout="@layout/fragment_favourite" />
+        tools:layout="@layout/fragment_favourite" >
+        <action
+            android:id="@+id/action_favouriteFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.example.dataapiexercise.screens.DetailsFragment"
