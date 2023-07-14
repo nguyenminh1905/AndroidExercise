@@ -1,4 +1,4 @@
-package com.example.dataapiexercise
+package com.example.dataapiexercise.adapter
 
 import android.view.LayoutInflater
 import android.view.MenuInflater
@@ -7,6 +7,7 @@ import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.dataapiexercise.R
 import com.example.dataapiexercise.databinding.ListSongItemBinding
 import com.example.dataapiexercise.network.Song
 
@@ -15,9 +16,9 @@ class ZingMusicAdapter(private val songList: List<Song>,
                        private val onDetailClick: (Song) -> Unit) :
     RecyclerView.Adapter<ZingMusicAdapter.ZingMusicHolder>() {
 
-    inner class ZingMusicHolder(val binding: ListSongItemBinding) :
+    inner class ZingMusicHolder(private val binding: ListSongItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        var currentSong: Song? = null
+        private var currentSong: Song? = null
 
         init {
             binding.overflowMenu.setOnClickListener { v ->
@@ -58,9 +59,9 @@ class ZingMusicAdapter(private val songList: List<Song>,
             }
         }
 
-        fun bind(song: Song, position: Int) {
+        fun bind(song: Song) {
             currentSong = song
-            binding.id.text = (position + 1).toString()
+            binding.position.text = song.position.toString()
             binding.songName.text = song.name
         }
     }
@@ -72,7 +73,7 @@ class ZingMusicAdapter(private val songList: List<Song>,
     }
 
     override fun onBindViewHolder(holder: ZingMusicHolder, position: Int) {
-        holder.bind(songList[position], position)
+        holder.bind(songList[position])
     }
 
     override fun getItemCount(): Int {

@@ -1,8 +1,7 @@
-package com.example.dataapiexercise
+package com.example.dataapiexercise.screens
 
 import android.os.Bundle
 import android.os.Parcelable
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +9,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.dataapiexercise.viewmodel.ZingViewModel
+import com.example.dataapiexercise.adapter.ZingMusicAdapter
 import com.example.dataapiexercise.databinding.FragmentZingMusicBinding
 import com.example.dataapiexercise.network.Song
 
@@ -19,6 +20,7 @@ class ZingMusicFragment : Fragment() {
     private var _binding: FragmentZingMusicBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: ZingViewModel
+    private var recycleState: Parcelable? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,9 +45,13 @@ class ZingMusicFragment : Fragment() {
             binding.recycleView.adapter = adapter
             binding.recycleView.layoutManager = LinearLayoutManager(requireContext())
 
-            // Restore state after rotation
+            // Restore state after onPause
+            binding.recycleView.layoutManager?.onRestoreInstanceState(recycleState)
+
+            // Restore recycleview state after screen rotation
             if (savedInstanceState != null) {
-                val savedRecyclerLayoutState = savedInstanceState.getParcelable<Parcelable>("recycler_state")
+                val savedRecyclerLayoutState =
+                    savedInstanceState.getParcelable<Parcelable>("recycler_state")
                 binding.recycleView.layoutManager?.onRestoreInstanceState(savedRecyclerLayoutState)
             }
         }
@@ -65,7 +71,15 @@ class ZingMusicFragment : Fragment() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putParcelable("recycler_state", binding.recycleView.layoutManager?.onSaveInstanceState())
+        outState.putParcelable(
+            "recycler_state",
+            binding.recycleView.layoutManager?.onSaveInstanceState()
+        )
+    }
+
+    override fun onPause() {
+        super.onPause()
+        recycleState = binding.recycleView.layoutManager?.onSaveInstanceState() // save state
     }
 }
 

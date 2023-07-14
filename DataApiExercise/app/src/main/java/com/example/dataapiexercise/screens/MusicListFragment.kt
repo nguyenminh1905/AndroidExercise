@@ -1,13 +1,12 @@
-package com.example.dataapiexercise
+package com.example.dataapiexercise.screens
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import com.example.dataapiexercise.R
 import com.example.dataapiexercise.databinding.FragmentMusicListBinding
-import com.example.dataapiexercise.databinding.FragmentZingMusicBinding
 
 class MusicListFragment : Fragment() {
 

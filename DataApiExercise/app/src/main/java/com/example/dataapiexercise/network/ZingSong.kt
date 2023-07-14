@@ -1,5 +1,9 @@
 package com.example.dataapiexercise.network
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
 data class ZingResponse(
     val data: ZingData
 )
@@ -9,7 +13,7 @@ data class ZingData(
 )
 
 data class Song(
-    val id: String,
+    val position: Int,
     val name: String,
     val artists_names: String,
     val duration: Int,

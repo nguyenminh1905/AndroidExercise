@@ -1,4 +1,4 @@
-package com.example.dataapiexercise
+package com.example.dataapiexercise.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData

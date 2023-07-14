@@ -1,4 +1,4 @@
-package com.example.dataapiexercise
+package com.example.dataapiexercise.screens
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.dataapiexercise.R
 import com.example.dataapiexercise.databinding.ActivityMainBinding
 
 
@@ -33,7 +34,9 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
-
+    /**
+     * For navigate back between fragment
+     */
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }

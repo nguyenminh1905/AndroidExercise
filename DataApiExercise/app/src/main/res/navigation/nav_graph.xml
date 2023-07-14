@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/musicListFragment"
-        android:name="com.example.dataapiexercise.MusicListFragment"
+        android:name="com.example.dataapiexercise.screens.MusicListFragment"
         android:label="Music List"
         tools:layout="@layout/fragment_music_list" />
     <fragment
         android:id="@+id/zingMusicFragment"
-        android:name="com.example.dataapiexercise.ZingMusicFragment"
+        android:name="com.example.dataapiexercise.screens.ZingMusicFragment"
         android:label="Zing Music Chart"
         tools:layout="@layout/fragment_zing_music">
         <action
@@ -26,12 +26,12 @@
     </fragment>
     <fragment
         android:id="@+id/favouriteFragment"
-        android:name="com.example.dataapiexercise.FavouriteFragment"
+        android:name="com.example.dataapiexercise.screens.FavouriteFragment"
         android:label="Favourites"
         tools:layout="@layout/fragment_favourite" />
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.example.dataapiexercise.DetailsFragment"
+        android:name="com.example.dataapiexercise.screens.DetailsFragment"
         android:label="Song Details"
         tools:layout="@layout/fragment_details" />
 </navigation>

@@ -15,7 +15,7 @@
         android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/id"
+        android:id="@+id/position"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxLines="1"
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_toEndOf ="@+id/id"
+        android:layout_toEndOf ="@+id/position"
         android:layout_toStartOf="@+id/overflow_menu"
         android:ellipsize="end"
         android:maxLines="1"
