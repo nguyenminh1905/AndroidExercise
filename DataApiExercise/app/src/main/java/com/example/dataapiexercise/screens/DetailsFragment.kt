@@ -32,7 +32,13 @@ class DetailsFragment : Fragment() {
             // Display the song details
             binding.name.text = "Song name : ${song.name}"
             binding.artist.text = "Artist: ${song.artists_names}"
-            binding.duration.text = "Duration: ${song.duration.toString()}"
+
+            //formatting duration
+            val minutes = song.duration / 60
+            val seconds = song.duration % 60
+            binding.duration.text = "Duration: ${String.format("%d:%02d", minutes, seconds)}"
+
+            //Checking if the song in an album or not
             binding.albumName.text = "Album: ${song.album?.name ?: "N/A"}"
         }
     }

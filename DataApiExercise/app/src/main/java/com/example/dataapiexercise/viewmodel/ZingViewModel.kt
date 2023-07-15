@@ -19,7 +19,6 @@ class ZingViewModel : ViewModel() {
      */
     private val _songs = MutableLiveData<List<Song>>()
     val selectedSong = MutableLiveData<Song>()
-
     val songs: LiveData<List<Song>>
         get() = _songs
 

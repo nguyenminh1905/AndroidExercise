@@ -1,10 +1,12 @@
 package com.example.dataapiexercise.network
 
+import com.example.dataapiexercise.utils.Constants.BASE_URL
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+
 
 interface ZingApiService {
 
@@ -26,7 +28,7 @@ interface ZingApiService {
 
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
-                .baseUrl("https://mp3.zing.vn/")
+                .baseUrl(BASE_URL)
                 .build()
 
             return retrofit.create(ZingApiService::class.java)
