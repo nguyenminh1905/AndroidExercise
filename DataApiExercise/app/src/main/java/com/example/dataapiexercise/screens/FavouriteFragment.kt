@@ -5,24 +5,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.dataapiexercise.R
 import com.example.dataapiexercise.adapter.FavouriteSongAdapter
+import com.example.dataapiexercise.database.FavouriteApplication
 import com.example.dataapiexercise.database.FavouriteSong
-import com.example.dataapiexercise.database.FavouriteSongDatabase
-import com.example.dataapiexercise.database.FavouriteSongRepository
 import com.example.dataapiexercise.databinding.FragmentFavouriteBinding
-import com.example.dataapiexercise.network.Song
 import com.example.dataapiexercise.viewmodel.FavouriteSongViewModel
 import com.example.dataapiexercise.viewmodel.FavouriteSongViewModelFactory
+import com.example.dataapiexercise.viewmodel.ZingViewModel
 
 class FavouriteFragment : Fragment() {
 
     private var _binding: FragmentFavouriteBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: FavouriteSongViewModel  // Initialize your ViewModel
+    private val viewModel: FavouriteSongViewModel by activityViewModels {
+        FavouriteSongViewModelFactory(
+            (activity?.application as FavouriteApplication).database.favouriteSongDao()
+        )
+    }  // Initialize your ViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,17 +38,6 @@ class FavouriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Set up ViewModel
-
-        val songDao = FavouriteSongDatabase.getDatabase(requireContext()).favouriteSongDao()
-        val repository = FavouriteSongRepository(songDao)
-        val favouriteSongViewModelFactory = FavouriteSongViewModelFactory(repository)
-        viewModel = ViewModelProvider(
-            this,
-            favouriteSongViewModelFactory
-        )[FavouriteSongViewModel::class.java]
-
-        // Set up RecyclerView and its Adapter
         val adapter = FavouriteSongAdapter(
             findNavController(), // NavController
             :: onDetailClick,        // onDetailClick
@@ -66,7 +58,9 @@ class FavouriteFragment : Fragment() {
     }
 
     private fun onDetailClick(favouriteSong: FavouriteSong) {
-        viewModel.selectedSong.value = favouriteSong
+        val zingViewModel = ViewModelProvider(requireActivity())[ZingViewModel::class.java]
+        val matchingSong = zingViewModel.songs.value?.find { it.name == favouriteSong.name }
+        matchingSong?.let { zingViewModel.selectedSong.value = it }
     }
 
     private fun onDeleteClick(favouriteSong: FavouriteSong){

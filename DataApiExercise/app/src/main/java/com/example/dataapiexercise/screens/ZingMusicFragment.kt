@@ -6,13 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dataapiexercise.viewmodel.ZingViewModel
 import com.example.dataapiexercise.adapter.ZingMusicAdapter
-import com.example.dataapiexercise.database.FavouriteSongDatabase
-import com.example.dataapiexercise.database.FavouriteSongRepository
+import com.example.dataapiexercise.database.FavouriteApplication
 import com.example.dataapiexercise.databinding.FragmentZingMusicBinding
 import com.example.dataapiexercise.network.Song
 import com.example.dataapiexercise.viewmodel.FavouriteSongViewModel
@@ -24,7 +24,11 @@ class ZingMusicFragment : Fragment() {
     private var _binding: FragmentZingMusicBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: ZingViewModel
-    private lateinit var favouriteSongViewModel: FavouriteSongViewModel
+    private val favouriteSongViewModel: FavouriteSongViewModel by activityViewModels {
+        FavouriteSongViewModelFactory(
+            (activity?.application as FavouriteApplication).database.favouriteSongDao()
+        )
+    }
     private var recycleState: Parcelable? = null
 
     override fun onCreateView(
@@ -41,15 +45,6 @@ class ZingMusicFragment : Fragment() {
 
         //setting up the viewmodel
         viewModel = ViewModelProvider(requireActivity())[ZingViewModel::class.java]
-        val songDao = FavouriteSongDatabase.getDatabase(requireContext()).favouriteSongDao()
-        val repository = FavouriteSongRepository(songDao)
-        val favouriteSongViewModelFactory = FavouriteSongViewModelFactory(repository)
-        favouriteSongViewModel = ViewModelProvider(
-            this,
-            favouriteSongViewModelFactory
-        )[FavouriteSongViewModel::class.java]
-
-
         viewModel.songs.observe(viewLifecycleOwner) { songs ->
             // Update adapter when song list changes
             val navController = findNavController()
@@ -57,16 +52,7 @@ class ZingMusicFragment : Fragment() {
                 ZingMusicAdapter(songs, navController, ::onDetailClick, favouriteSongViewModel)
             binding.recycleView.adapter = adapter
             binding.recycleView.layoutManager = LinearLayoutManager(requireContext())
-
-            // Restore state after onPause
             binding.recycleView.layoutManager?.onRestoreInstanceState(recycleState)
-
-            // Restore recycleview state after screen rotation
-            //if (savedInstanceState != null) {
-            //   val savedRecyclerLayoutState =
-            //      savedInstanceState.getParcelable<Parcelable>("recycler_state")
-            //  binding.recycleView.layoutManager?.onRestoreInstanceState(savedRecyclerLayoutState)
-            // }
         }
     }
 
@@ -76,15 +62,6 @@ class ZingMusicFragment : Fragment() {
     private fun onDetailClick(song: Song) {
         viewModel.selectedSong.value = song
     }
-
-    /**
-    override fun onSaveInstanceState(outState: Bundle) {
-    super.onSaveInstanceState(outState)
-    binding?.recycleView?.layoutManager?.onSaveInstanceState()?.let { state ->
-    outState.putParcelable("recycler_state", state)
-    }
-    }
-     */
 
     override fun onPause() {
         super.onPause()
@@ -96,5 +73,3 @@ class ZingMusicFragment : Fragment() {
         _binding = null
     }
 }
-
-
