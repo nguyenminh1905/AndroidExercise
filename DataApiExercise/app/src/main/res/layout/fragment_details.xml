@@ -3,35 +3,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screens.DetailsFragment"
+    android:layout_margin="16dp"
     android:orientation="vertical"
-    android:layout_margin="16dp">
+    tools:context=".screens.DetailsFragment">
 
     <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/thumbnail"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:padding="2dp"
+        android:scaleType="fitXY" />
+
     <TextView
         android:id="@+id/name"
-        android:layout_width="wrap_content"
+        style="@style/DetailText"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Song: Ngày Mình Chia Tay"/>
+        android:gravity="center"
+        android:padding="6dp"
+        tools:text="Song: Ngày Mình Chia Tay" />
 
     <TextView
         android:id="@+id/artist"
-        android:layout_width="wrap_content"
+        style="@style/DetailText"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Artist: Phan Duy Anh"
-        />
+        android:gravity="center"
+        android:padding="6dp"
+        tools:text="Artist: Phan Duy Anh" />
 
     <TextView
         android:id="@+id/duration"
-        android:layout_width="wrap_content"
+        style="@style/DetailText"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Duration: 3:17"
-        />
+        android:gravity="center"
+        android:padding="6dp"
+        tools:text="Duration: 3:17" />
 
     <TextView
         android:id="@+id/album_name"
-        android:layout_width="wrap_content"
+        style="@style/DetailText"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Album: Ngày Mình Chia Tay (Single)"
-        />
+        android:gravity="center"
+        android:padding="6dp"
+        tools:text="Album: Ngày Mình Chia Tay (Single)" />
 </LinearLayout>

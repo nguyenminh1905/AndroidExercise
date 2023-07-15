@@ -17,6 +17,7 @@ data class Song(
     val name: String,
     val artists_names: String,
     val duration: Int,
+    val thumbnail: String?,
     val album: Album?
 )
 

@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dataapiexercise.R
-import com.example.dataapiexercise.database.FavouriteSong
 import com.example.dataapiexercise.databinding.ListSongItemBinding
 import com.example.dataapiexercise.network.Song
 import com.example.dataapiexercise.viewmodel.FavouriteSongViewModel
