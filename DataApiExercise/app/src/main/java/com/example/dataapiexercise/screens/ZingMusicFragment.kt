@@ -7,9 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.dataapiexercise.R
 import com.example.dataapiexercise.viewmodel.ZingViewModel
 import com.example.dataapiexercise.adapter.ZingMusicAdapter
 import com.example.dataapiexercise.database.FavouriteApplication
@@ -23,7 +22,9 @@ class ZingMusicFragment : Fragment() {
 
     private var _binding: FragmentZingMusicBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: ZingViewModel
+
+    //delegate activityViewModels for sharing data between fragment
+    private val zingViewModel: ZingViewModel by activityViewModels()
     private val favouriteSongViewModel: FavouriteSongViewModel by activityViewModels {
         FavouriteSongViewModelFactory(
             (activity?.application as FavouriteApplication).database.favouriteSongDao()
@@ -42,25 +43,24 @@ class ZingMusicFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val navController = findNavController()
 
-        //setting up the viewmodel
-        viewModel = ViewModelProvider(requireActivity())[ZingViewModel::class.java]
-        viewModel.songs.observe(viewLifecycleOwner) { songs ->
-            // Update adapter when song list changes
-            val navController = findNavController()
+        //observing songs change through viewmodel
+        zingViewModel.songs.observe(viewLifecycleOwner) { songs ->
             val adapter =
                 ZingMusicAdapter(songs, navController, ::onDetailClick, favouriteSongViewModel)
+            // Update adapter when song list changes
             binding.recycleView.adapter = adapter
-            binding.recycleView.layoutManager = LinearLayoutManager(requireContext())
-            binding.recycleView.layoutManager?.onRestoreInstanceState(recycleState)
         }
+        //restoring scroll state onPause
+        binding.recycleView.layoutManager?.onRestoreInstanceState(recycleState)
     }
 
     /**
      * passing data of the selected song to the details
      */
     private fun onDetailClick(song: Song) {
-        viewModel.selectedSong.value = song
+        zingViewModel.selectedSong.value = song
     }
 
     override fun onPause() {

@@ -22,7 +22,7 @@ class FavouriteSongViewModel(private val favouriteSongDao: FavouriteSongDao) : V
     }
 
     fun addFavourite(songName: String) {
-        val favouriteSong = FavouriteSong(id = null, name = songName)
+        val favouriteSong = FavouriteSong(name = songName)
         insert(favouriteSong)
     }
 }
