@@ -79,12 +79,10 @@ class FavouriteSongAdapter(
 
     class FavouriteSongComparator : DiffUtil.ItemCallback<FavouriteSong>() {
         override fun areItemsTheSame(oldItem: FavouriteSong, newItem: FavouriteSong): Boolean {
-            // Id is unique.
             return oldItem.name == newItem.name
         }
 
         override fun areContentsTheSame(oldItem: FavouriteSong, newItem: FavouriteSong): Boolean {
-            // This can be enhanced based on specific fields when data class changes
             return oldItem == newItem
         }
     }
