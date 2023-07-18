@@ -34,9 +34,9 @@ class MusicViewModel : ViewModel() {
             val dataColumnIndex = c.getColumnIndex(MediaStore.Audio.Media.DATA)
 
             while (c.moveToNext()) {
-                val name = if (nameColumnIndex != -1) c.getString(nameColumnIndex) else ""
-                val artist = if (artistColumnIndex != -1) c.getString(artistColumnIndex) else ""
-                val data = if (dataColumnIndex != -1) c.getString(dataColumnIndex) else ""
+                val name = c.getString(nameColumnIndex)
+                val artist = c.getString(artistColumnIndex)
+                val data = c.getString(dataColumnIndex)
 
                 songs.add(PhoneSong(name, artist, data))
             }

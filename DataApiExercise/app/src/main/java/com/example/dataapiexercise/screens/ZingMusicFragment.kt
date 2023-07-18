@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.example.dataapiexercise.R
 import com.example.dataapiexercise.viewmodel.ZingViewModel
 import com.example.dataapiexercise.adapter.ZingMusicAdapter
 import com.example.dataapiexercise.database.FavouriteApplication
@@ -51,6 +50,7 @@ class ZingMusicFragment : Fragment() {
                 ZingMusicAdapter(songs, navController, ::onDetailClick, favouriteSongViewModel)
             // Update adapter when song list changes
             binding.recycleView.adapter = adapter
+            adapter.notifyDataSetChanged()
         }
         //restoring scroll state onPause
         binding.recycleView.layoutManager?.onRestoreInstanceState(recycleState)
