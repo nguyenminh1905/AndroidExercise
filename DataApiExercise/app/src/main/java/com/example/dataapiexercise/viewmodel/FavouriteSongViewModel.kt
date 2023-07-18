@@ -13,6 +13,7 @@ class FavouriteSongViewModel(private val favouriteSongDao: FavouriteSongDao) : V
 
     val allFavouriteSongs: LiveData<List<FavouriteSong>> = favouriteSongDao.getAll().asLiveData()
 
+
     private fun insert(favouriteSong: FavouriteSong) = viewModelScope.launch {
         favouriteSongDao.insert(favouriteSong)
     }
@@ -21,13 +22,23 @@ class FavouriteSongViewModel(private val favouriteSongDao: FavouriteSongDao) : V
         favouriteSongDao.delete(favouriteSong)
     }
 
-    fun addFavourite(songName: String) {
-        val favouriteSong = FavouriteSong(name = songName)
-        insert(favouriteSong)
+    fun toggleFavourite(songId: Int, songName: String) = viewModelScope.launch {
+        val favouriteSong = favouriteSongDao.getSong(songId)
+
+        if (favouriteSong == null) {
+            insert(FavouriteSong(id = songId, name = songName))
+        } else {
+            delete(favouriteSong)
+        }
+    }
+
+    fun isFavourite(songId: Int): Boolean {
+        return allFavouriteSongs.value?.any { it.id == songId } ?: false
     }
 }
 
-class FavouriteSongViewModelFactory(private val favouriteSongDao: FavouriteSongDao) : ViewModelProvider.Factory {
+class FavouriteSongViewModelFactory(private val favouriteSongDao: FavouriteSongDao) :
+    ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(FavouriteSongViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")

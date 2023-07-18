@@ -18,4 +18,7 @@ interface FavouriteSongDao {
     @Query("SELECT * FROM favourite_songs")
     fun getAll(): Flow<List<FavouriteSong>>
 
+
+    @Query("SELECT * FROM favourite_songs WHERE id = :songId LIMIT 1")
+    suspend fun getSong(songId: Int): FavouriteSong?
 }

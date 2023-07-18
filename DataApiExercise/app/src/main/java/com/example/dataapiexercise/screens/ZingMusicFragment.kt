@@ -72,4 +72,5 @@ class ZingMusicFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }

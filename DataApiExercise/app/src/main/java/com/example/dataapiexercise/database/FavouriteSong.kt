@@ -5,6 +5,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "favourite_songs")
 data class FavouriteSong(
-    @PrimaryKey(false)
-    val name: String
+    @PrimaryKey
+    val id: Int = 0,
+
+    val name: String,
+
+    val isFavourite: Boolean = false
 )

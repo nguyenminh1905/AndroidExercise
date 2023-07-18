@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dataapiexercise.R
 import com.example.dataapiexercise.database.FavouriteSong
+import com.example.dataapiexercise.databinding.ListFavouriteItemBinding
 import com.example.dataapiexercise.databinding.ListSongItemBinding
 
 class FavouriteSongAdapter(
@@ -19,7 +20,7 @@ class FavouriteSongAdapter(
     private val onDeleteClick: (FavouriteSong) -> Unit
 ) : ListAdapter<FavouriteSong, FavouriteSongAdapter.FavouriteSongHolder>(FavouriteSongComparator()) {
 
-    inner class FavouriteSongHolder(private val binding: ListSongItemBinding) :
+    inner class FavouriteSongHolder(private val binding: ListFavouriteItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         private var currentFavouriteSong: FavouriteSong? = null
 
@@ -62,14 +63,13 @@ class FavouriteSongAdapter(
 
         fun bind(favouriteSong: FavouriteSong, position: Int) {
             currentFavouriteSong = favouriteSong
-            binding.position.text = (position + 1).toString()
             binding.songName.text = favouriteSong.name
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavouriteSongHolder {
         val binding =
-            ListSongItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ListFavouriteItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return FavouriteSongHolder(binding)
     }
 
