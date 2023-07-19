@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.dataapiexercise.R
 import com.example.dataapiexercise.adapter.FavouriteSongAdapter
 import com.example.dataapiexercise.database.FavouriteApplication
 import com.example.dataapiexercise.database.FavouriteSong
@@ -39,11 +39,11 @@ class FavouriteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val adapter = FavouriteSongAdapter(
-            findNavController(),
             ::onDetailClick,
             ::onDeleteClick
         )
         binding.recycleView.adapter = adapter
+        adapter.notifyDataSetChanged()
 
         // Observe favourite songs from the database and update the adapter when the data changes
         favouriteSongViewModel.allFavouriteSongs.observe(viewLifecycleOwner) { songs ->
@@ -59,6 +59,8 @@ class FavouriteFragment : Fragment() {
     private fun onDetailClick(favouriteSong: FavouriteSong) {
         val matchingSong = zingViewModel.songs.value?.find { it.name == favouriteSong.name }
         matchingSong?.let { zingViewModel.selectedSong.value = it }
+        val navController = findNavController()
+        navController.navigate(R.id.action_favouriteFragment_to_detailsFragment)
     }
 
     private fun onDeleteClick(favouriteSong: FavouriteSong) {

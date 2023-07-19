@@ -1,9 +1,5 @@
 package com.example.dataapiexercise.network
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
 data class ZingResponse(
     val data: ZingData
 )

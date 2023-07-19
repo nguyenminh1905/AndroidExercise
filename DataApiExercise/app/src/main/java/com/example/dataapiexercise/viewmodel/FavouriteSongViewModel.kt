@@ -32,10 +32,13 @@ class FavouriteSongViewModel(private val favouriteSongDao: FavouriteSongDao) : V
         }
     }
 
-    fun isFavourite(songId: Int): Boolean {
-        return allFavouriteSongs.value?.any { it.id == songId } ?: false
+    fun isFavourite(songId: Int, isFavourite: (Boolean) -> Unit){
+        viewModelScope.launch {
+           isFavourite(favouriteSongDao.getSong(songId) != null)
+        }
     }
 }
+
 
 class FavouriteSongViewModelFactory(private val favouriteSongDao: FavouriteSongDao) :
     ViewModelProvider.Factory {

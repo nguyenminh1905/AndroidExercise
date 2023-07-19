@@ -9,17 +9,16 @@ import com.example.dataapiexercise.network.Song
 import com.example.dataapiexercise.network.ZingApiService
 import kotlinx.coroutines.launch
 
-/**
- * viewmodel to passing song data between fragment
- */
 class ZingViewModel : ViewModel() {
 
     /**
      * Using livedata to auto update the UI
      */
+
     private val _songs = MutableLiveData<List<Song>>()
     val selectedSong = MutableLiveData<Song>()
-    val songs: LiveData<List<Song>>
+    val songs:
+            LiveData<List<Song>>
         get() = _songs
 
     init {

@@ -1,30 +1,26 @@
 package com.example.dataapiexercise.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.MenuInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
-import androidx.navigation.NavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dataapiexercise.R
 import com.example.dataapiexercise.database.FavouriteSong
 import com.example.dataapiexercise.databinding.ListFavouriteItemBinding
-import com.example.dataapiexercise.databinding.ListSongItemBinding
 
 class FavouriteSongAdapter(
-    private val navController: NavController,
     private val onDetailClick: (FavouriteSong) -> Unit,
     private val onDeleteClick: (FavouriteSong) -> Unit
 ) : ListAdapter<FavouriteSong, FavouriteSongAdapter.FavouriteSongHolder>(FavouriteSongComparator()) {
 
     inner class FavouriteSongHolder(private val binding: ListFavouriteItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private var currentFavouriteSong: FavouriteSong? = null
 
-        init {
+        fun bind(favouriteSong: FavouriteSong) {
+            binding.songName.text = favouriteSong.name
             binding.overflowMenu.setOnClickListener { v ->
                 val popup = PopupMenu(v.context, v)
                 val inflater: MenuInflater = popup.menuInflater
@@ -33,17 +29,12 @@ class FavouriteSongAdapter(
                 popup.setOnMenuItemClickListener { item ->
                     when (item.itemId) {
                         R.id.delete -> {
-                            currentFavouriteSong?.let {
-                                onDeleteClick(it)
-                            }
+                            onDeleteClick(favouriteSong)
                             true
                         }
 
                         R.id.detail -> {
-                            currentFavouriteSong?.let {
-                                onDetailClick(it)
-                            }
-                            navController.navigate(R.id.action_favouriteFragment_to_detailsFragment)
+                            onDetailClick(favouriteSong)
                             true
                         }
 
@@ -54,16 +45,8 @@ class FavouriteSongAdapter(
             }
 
             binding.card.setOnClickListener {
-                currentFavouriteSong?.let {
-                    onDetailClick(it)
-                }
-                navController.navigate(R.id.action_favouriteFragment_to_detailsFragment)
+                onDetailClick(favouriteSong)
             }
-        }
-
-        fun bind(favouriteSong: FavouriteSong, position: Int) {
-            currentFavouriteSong = favouriteSong
-            binding.songName.text = favouriteSong.name
         }
     }
 
@@ -74,7 +57,7 @@ class FavouriteSongAdapter(
     }
 
     override fun onBindViewHolder(holder: FavouriteSongHolder, position: Int) {
-        holder.bind(getItem(position), position)
+        holder.bind(getItem(position))
     }
 
     class FavouriteSongComparator : DiffUtil.ItemCallback<FavouriteSong>() {

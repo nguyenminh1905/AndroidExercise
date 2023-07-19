@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.example.dataapiexercise.R
 import com.example.dataapiexercise.viewmodel.ZingViewModel
 import com.example.dataapiexercise.adapter.ZingMusicAdapter
 import com.example.dataapiexercise.database.FavouriteApplication
@@ -19,6 +21,7 @@ import com.example.dataapiexercise.viewmodel.FavouriteSongViewModelFactory
 
 class ZingMusicFragment : Fragment() {
 
+    private lateinit var navController: NavController
     private var _binding: FragmentZingMusicBinding? = null
     private val binding get() = _binding!!
 
@@ -42,15 +45,14 @@ class ZingMusicFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val navController = findNavController()
+        navController = findNavController()
 
         //observing songs change through viewmodel
         zingViewModel.songs.observe(viewLifecycleOwner) { songs ->
             val adapter =
-                ZingMusicAdapter(songs, navController, ::onDetailClick, favouriteSongViewModel)
+                ZingMusicAdapter(songs, ::onDetailClick, favouriteSongViewModel)
             // Update adapter when song list changes
             binding.recycleView.adapter = adapter
-            adapter.notifyDataSetChanged()
         }
         //restoring scroll state onPause
         binding.recycleView.layoutManager?.onRestoreInstanceState(recycleState)
@@ -61,6 +63,8 @@ class ZingMusicFragment : Fragment() {
      */
     private fun onDetailClick(song: Song) {
         zingViewModel.selectedSong.value = song
+        navController.navigate(R.id.action_zingMusicFragment_to_detailsFragment)
+
     }
 
     override fun onPause() {

@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import coil.load
-import com.bumptech.glide.Glide
 import com.example.dataapiexercise.R
 import com.example.dataapiexercise.viewmodel.ZingViewModel
 import com.example.dataapiexercise.databinding.FragmentDetailsBinding
@@ -21,8 +20,7 @@ class DetailsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    ): View {
         _binding = FragmentDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
