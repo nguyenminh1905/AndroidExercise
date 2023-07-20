@@ -2,6 +2,10 @@ package com.example.dataapiexercise.screens
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import androidx.activity.viewModels
+import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -9,12 +13,15 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.dataapiexercise.R
 import com.example.dataapiexercise.databinding.ActivityMainBinding
+import com.example.dataapiexercise.viewmodel.ZingViewModel
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
+    private val zingViewModel: ZingViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,4 +47,25 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_search, menu)
+        val searchItem = menu.findItem(R.id.action_search)
+        val searchView = searchItem.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                // Not used in this case
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                zingViewModel.isSearchOngoing.value = !newText.isNullOrEmpty()
+                zingViewModel.filter(newText ?: "")
+                return true
+            }
+        })
+        return true
+    }
+
 }

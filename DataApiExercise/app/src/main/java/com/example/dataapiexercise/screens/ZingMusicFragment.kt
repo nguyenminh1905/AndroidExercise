@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.os.Parcelable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -43,16 +46,26 @@ class ZingMusicFragment : Fragment() {
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = findNavController()
 
         //observing songs change through viewmodel
-        zingViewModel.songs.observe(viewLifecycleOwner) { songs ->
-            val adapter =
-                ZingMusicAdapter(songs, ::onDetailClick, favouriteSongViewModel)
-            // Update adapter when song list changes
-            binding.recycleView.adapter = adapter
+        zingViewModel.isSearchOngoing.observe(viewLifecycleOwner) { isSearch ->
+            if (isSearch) {
+                // If a search is ongoing, observe filteredSongs
+                zingViewModel.filteredSongs.observe(viewLifecycleOwner) { songs ->
+                    val adapter = ZingMusicAdapter(songs, ::onDetailClick, favouriteSongViewModel)
+                    binding.recycleView.adapter = adapter
+                }
+            } else {
+                // If there's no search, observe songs
+                zingViewModel.songs.observe(viewLifecycleOwner) { songs ->
+                    val adapter = ZingMusicAdapter(songs, ::onDetailClick, favouriteSongViewModel)
+                    binding.recycleView.adapter = adapter
+                }
+            }
         }
         //restoring scroll state onPause
         binding.recycleView.layoutManager?.onRestoreInstanceState(recycleState)
@@ -76,5 +89,6 @@ class ZingMusicFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 
 }

@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.dataapiexercise.adapter.ZingMusicAdapter
 import com.example.dataapiexercise.databinding.FragmentMusicListBinding
 import com.example.dataapiexercise.utils.Constants.REQUEST_CODE
 import com.example.dataapiexercise.viewmodel.MusicViewModel

@@ -44,7 +44,7 @@
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:padding="8dp"
-        tools:src="@drawable/ic_empty_fav" />
+        android:src="@drawable/ic_empty_fav" />
 
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>
