@@ -37,6 +37,11 @@ class ZingMusicFragment : Fragment() {
     }
     private var recycleState: Parcelable? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)  // tell the fragment to call onCreateOptionsMenu
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -90,5 +95,23 @@ class ZingMusicFragment : Fragment() {
         _binding = null
     }
 
+    @Suppress("DEPRECATION")
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_search, menu)
+        val searchItem = menu.findItem(R.id.action_search)
+        val searchView = searchItem.actionView as SearchView
 
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                zingViewModel.isSearchOngoing.value = !newText.isNullOrEmpty()
+                zingViewModel.filter(newText ?: "")
+                return true
+            }
+        })
+    }
 }

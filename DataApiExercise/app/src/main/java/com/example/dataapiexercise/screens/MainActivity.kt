@@ -48,24 +48,4 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_search, menu)
-        val searchItem = menu.findItem(R.id.action_search)
-        val searchView = searchItem.actionView as SearchView
-
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                // Not used in this case
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                zingViewModel.isSearchOngoing.value = !newText.isNullOrEmpty()
-                zingViewModel.filter(newText ?: "")
-                return true
-            }
-        })
-        return true
-    }
-
 }
