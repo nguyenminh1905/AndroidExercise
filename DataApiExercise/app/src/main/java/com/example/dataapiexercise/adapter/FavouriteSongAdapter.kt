@@ -21,7 +21,8 @@ class FavouriteSongAdapter(
 
         fun bind(favouriteSong: FavouriteSong) {
             binding.songName.text = favouriteSong.name
-            binding.overflowMenu.setOnClickListener { v ->
+            //take in lambda can do as v -> or simply just pass it
+            binding.overflowMenu.setOnClickListener {v ->
                 val popup = PopupMenu(v.context, v)
                 val inflater: MenuInflater = popup.menuInflater
                 inflater.inflate(R.menu.favourite_three_dots_menu, popup.menu)

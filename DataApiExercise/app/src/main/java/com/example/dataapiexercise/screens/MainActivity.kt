@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
-    private val zingViewModel: ZingViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -95,7 +95,6 @@ class ZingMusicFragment : Fragment() {
         _binding = null
     }
 
-    @Suppress("DEPRECATION")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_search, menu)

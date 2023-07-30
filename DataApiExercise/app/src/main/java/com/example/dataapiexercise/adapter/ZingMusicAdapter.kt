@@ -28,17 +28,6 @@ class ZingMusicAdapter(
             binding.favourite.setOnClickListener { v ->
                 song.let {
                     viewModel.toggleFavourite(it.position, it.name)
-                    /**
-                    if (viewModel.isFavourite(it.position)) {
-                        binding.favourite.setImageResource(R.drawable.ic_fill_fav)
-                        Toast.makeText(v.context, "Remove from favourite", Toast.LENGTH_SHORT)
-                            .show()
-                    } else {
-                        binding.favourite.setImageResource(R.drawable.ic_empty_fav)
-                        Toast.makeText(v.context, "Added to favourite!", Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                    */
                     viewModel.viewModelScope.launch(Dispatchers.Main) {
                         delay(300)
                         notifyItemChanged(position)
